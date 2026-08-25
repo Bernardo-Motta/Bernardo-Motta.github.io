@@ -1,1 +1,349 @@
+# 🚀 Guia Prático: Executando o Qwen 2.5 Localmente para Avaliação de Texto
 
+O **Qwen 2.5** é uma das famílias de modelos de linguagem pequenos (SLMs) mais eficientes do mercado atual. Ele se destaca pelo excelente equilíbrio entre custo computacional e inteligência, sendo ideal para execução em computadores locais de configuração média, sem a necessidade de gastar com APIs de nuvem.
+
+Este guia prático mostra o passo a passo para colocar o **Qwen 2.5 (7B)** para rodar na sua máquina e utilizá-lo para testes de processamento de texto e simplificação linguística.
+
+---
+
+## 🛠️ Requisitos Iniciais
+
+Para rodar o modelo de 7B (7 bilhões de parâmetros) com bom desempenho, você precisará de:
+*   **Processador (CPU):** Com pelo menos 4 núcleos modernos.
+*   **Memória RAM:** Mínimo de 16 GB (ou uma placa de vídeo com pelo menos 8 GB de VRAM).
+*   **Espaço em disco:** Cerca de 5 GB livres para o modelo quantizado.
+
+---
+
+## 🏎️ Passo 1: Instalando o Ollama
+
+O **Ollama** é uma ferramenta de código aberto que simplifica a execução de modelos de linguagem locais, gerenciando o carregamento na memória e oferecendo uma API local pronta para uso.
+
+1.  Acesse o site oficial [ollama.com](https://ollama.com) e faça o download para o seu sistema operacional (Windows, macOS ou Linux).
+2.  Instale e abra o aplicativo.
+3.  No seu terminal, digite o seguinte comando para baixar e rodar o modelo automaticamente:
+
+```bash
+ollama run qwen2.5:7b
+```
+
+*Pronto! Você já pode interagir com o modelo diretamente pelo terminal.*
+
+---
+
+## 🐍 Passo 2: Integração com Python
+
+Agora que o motor do modelo está rodando em segundo plano no seu computador, podemos usar um script em Python para enviar textos difíceis e pedir que a IA realize transformações linguísticas.
+
+Primeiro, instale a biblioteca oficial do Ollama:
+
+```bash
+pip install ollama
+```
+
+### Script de Teste: `simplificador_local.py`
+
+Crie um arquivo chamado `simplificador_local.py` e adicione o seguinte código:
+
+```python
+import ollama
+
+def simplificar_texto(texto_complexo):
+    # Prompt estruturado para guiar a IA na simplificação linguística
+    prompt_sistema = (
+        "Você é um assistente especialista em acessibilidade e simplificação textual em português do Brasil. "
+        "Sua tarefa é ler um texto técnico ou complexo e reescrevê-lo de forma que pessoas com nível básico "
+        "de alfabetismo consigam compreender perfeitamente. "
+        "Siga estritamente: divida frases longas, remova jargões excessivos e prefira palavras de fácil visualização."
+    )
+    
+    prompt_usuario = f"Por favor, simplifique o seguinte texto:\n\n{texto_complexo}"
+    
+    try:
+        # Chamando o modelo local carregado no Ollama
+        resposta = ollama.chat(
+            model='qwen2.5:7b',
+            messages=[
+                {'role': 'system', 'content': prompt_sistema},
+                {'role': 'user', 'content': prompt_usuario}
+            ],
+            options={
+                'temperature': 0.3, # Menor temperatura para evitar alucinações e manter a fidelidade
+            }
+        )
+        return resposta['message']['content']
+        
+    except Exception as e:
+        return f"Erro ao conectar com o modelo local: {e}"
+
+if __name__ == "__main__":
+    # Exemplo de texto com alta densidade de termos complexos
+    texto_para_teste = (
+        "A inteligência artificial generativa denota avanços ímpares na cognição computacional, "
+        "viabilizando a confecção de discursos textuais de elevada fidedignidade semântica."
+    )
+    
+    print("--- Texto Original ---")
+    print(texto_para_teste)
+    print("\n--- Simplificação Realizada pelo Qwen 2.5 ---")
+    
+    texto_simplificado = simplificar_texto(texto_para_teste)
+    print(texto_simplificado)
+```
+
+---
+
+## 📊 Passo 3: O que avaliar após a execução?
+
+Ao rodar esse teste na sua máquina, utilize as réguas que definimos na metodologia de avaliação para medir a qualidade do resultado:
+
+1.  **Fidelidade Semântica (Inspirado no ASSIN2):** O texto simplificado manteve a mensagem original (de que as IAs criam textos muito bons e parecidos com o humano)? Ou inventou informações novas?
+2.  **Seguimento de Instruções (Inspirado no CAPITU):** A IA respeitou as ordens de dividir as frases e evitar palavras rebuscadas?
+3.  **Complexidade do Texto (Inspirado no NILC-Metrix):** As palavras utilizadas na resposta são mais comuns e fáceis de visualizar na mente do que as do texto original?
+
+---
+*Este guia faz parte do projeto de sistematização e avaliação de tecnologias de GenAI em português.*
+
+# 🧩 Guia Visual: Arquiteturas Multiagentes (Supervisor vs. Swarm)
+
+Quando começamos a construir soluções com IA, o primeiro passo geralmente é usar um único agente (*Single-Agent*) que pensa e age sozinho. Porém, para tarefas complexas, colocar toda a carga em um único "cérebro" gera gargalos e erros frequentes.
+
+É aí que entram os **Sistemas Multiagentes (MAS)**: dividimos o problema principal entre vários agentes especializados que colaboram entre si para atingir o objetivo.
+
+Neste guia, vamos explorar de forma visual e direta as duas formas mais populares e eficientes de organizar essas equipes de IA: o padrão **Supervisor** (centralizado) e o padrão **Swarm** (descentralizado).
+
+---
+
+## 👑 1. O Padrão Supervisor (Orquestração Centralizada)
+
+Imagine uma agência de desenvolvimento tradicional. O **Supervisor** é o gerente de projetos. Ele recebe o briefing do usuário, decide quem vai fazer o quê, distribui as tarefas para os especialistas e revisa o trabalho de cada um antes de entregar o resultado final.
+
+### 📊 Fluxo Visual:
+```
+                [ 👤 Usuário ]
+                      │
+                      ▼
+             ┌─────────────────┐
+             │  👑 Supervisor   │◄────────────────┐
+             └─────────────────┘                 │
+                │      │      │                  │ (Revisão / Feedback)
+     ┌──────────┘      │      └──────────┐       │
+     ▼                 ▼                 ▼       │
+┌──────────┐      ┌──────────┐      ┌──────────┐  │
+│ 📝 Redator│      │🎨 Designer│      │💻 Codador │──┘
+└──────────┘      └──────────┘      └──────────┘
+```
+
+### Como funciona:
+1. O **Supervisor** recebe o objetivo geral do usuário.
+2. Ele analisa o problema, quebra-o em etapas e decide qual sub-agente é o melhor para a primeira fase.
+3. Ele chama o **Agente A** (ex: Redator) e aguarda o retorno.
+4. O Supervisor avalia a qualidade da entrega do Agente A. Se estiver ruim, manda refazer. Se estiver boa, ele passa o resultado como contexto para o **Agente B** (ex: Designer).
+5. O processo continua até que o Supervisor considere a tarefa concluída e entregue a resposta ao usuário.
+
+*   **Ideal para:** Processos que exigem controle estrito de qualidade, fluxos lineares com etapas rígidas e tarefas de auditoria ou validação.
+
+---
+
+## 🐝 2. O Padrão Swarm (Colaboração Descentralizada)
+
+Agora, imagine uma equipe ágil e sem liderança central. Não existe um chefe ditando as regras. O projeto começa com o **Agente A**. Quando ele termina a parte dele, ele mesmo avalia o estado atual do projeto e decide: *"O próximo passo precisa de design, então vou passar o bastão diretamente para o Agente B"*.
+
+### 📊 Fluxo Visual:
+```
+[ 👤 Usuário ] ──► [ 📝 Agente Redator ] ──► [ 🎨 Agente Designer ]
+                          ▲                         │
+                          │                         ▼
+                    [ 🔍 Revisor ] ◄───────── [ 💻 Agente Codador ]
+                          │
+                          ▼
+                    [ 👤 Saída ]
+```
+
+### Como funciona:
+1. O primeiro agente recebe a entrada inicial do usuário.
+2. Ele executa a sua função especializada (ex: escrever o texto estruturado).
+3. Ao finalizar, ele usa uma função de transição (*handoff*) para passar o controle e as informações diretamente para o próximo agente especialista aplicável.
+4. Os agentes conversam e passam as tarefas entre si de forma dinâmica.
+5. O fluxo se encerra quando o agente que está com o controle determina que o objetivo foi 100% atingido e entrega a saída.
+
+*   **Ideal para:** Exploração de dados, fluxos de conversação muito dinâmicos e cenários onde a rigidez de um supervisor central tornaria o processo lento ou engessado.
+
+---
+
+## ⚖️ Comparação Direta: Qual padrão escolher?
+
+| Característica | 👑 Supervisor (Centralizado) | 🐝 Swarm (Descentralizado) |
+| :--- | :--- | :--- |
+| **Coordenação** | Centralizada em um único tomador de decisão. | Descentralizada através de *handoffs* diretos. |
+| **Controle de Qualidade** | Altíssimo (o supervisor atua como um filtro/revisor). | Depende da capacidade de cada agente especializado. |
+| **Gasto de Tokens** | Maior (o supervisor precisa ler os históricos constantemente). | Menor (o contexto é transferido de forma limpa entre os agentes). |
+| **Flexibilidade** | Baixa (segue o roteiro que o coordenador ditar). | Altíssima (adapta-se dinamicamente conforme a necessidade). |
+
+---
+
+## 💻 Exemplo Prático de Swarm em Python (Conceito)
+
+Para dar vida ao padrão **Swarm**, utilizamos o conceito de funções que retornam o próximo agente. Veja como a lógica de "passagem de bastão" funciona de forma limpa no código:
+
+```python
+class Agente:
+    def __init__(self, nome, instrucoes):
+        self.nome = nome
+        self.instrucoes = instrucoes
+
+# Funções de transição (Handoffs)
+def transferir_para_designer(contexto):
+    print("➡️ Redator terminando. Passando o bastão para o Designer...")
+    return agente_designer
+
+def transferir_para_programador(contexto):
+    print("➡️ Designer terminando. Passando o bastão para o Programador...")
+    return agente_programador
+
+# Criando nossos agentes especializados
+agente_redator = Agente(
+    nome="Redator",
+    instrucoes="Escreva o escopo estruturado da página e chame o designer."
+)
+
+agente_designer = Agente(
+    nome="Designer",
+    instrucoes="Crie o layout visual do site e passe para o programador."
+)
+
+agente_programador = Agente(
+    nome="Programador",
+    instrucoes="Escreva o código HTML/CSS final correspondente."
+)
+```
+
+Essa abordagem torna seus sistemas incrivelmente modulares, permitindo escalar a sua equipe de IAs sem precisar reescrever as regras do sistema do zero!
+
+# 📊 Métricas de Legibilidade: Como Medir a Complexidade do seu Texto Localmente
+
+Quando simplificamos um texto ou pedimos para uma IA explicar um conceito complexo, precisamos de uma forma matemática e imparcial para provar que o texto realmente ficou mais fácil de ler. 
+
+Neste guia prático, você vai aprender a implementar o **Índice de Legibilidade de Flesch (adaptado para o Português)** em um script Python simples, rodando totalmente local e sem dependências externas.
+
+---
+
+## 🧐 O que é o Índice de Flesch?
+
+O teste de legibilidade de Flesch avalia o texto com base no comprimento das frases e no tamanho das palavras. Ele gera uma pontuação de **0 a 100**:
+*   **75 a 100:** Muito Fácil (nível de leitura de escola primária).
+*   **50 a 75:** Fácil/Médio (linguagem cotidiana e acessível).
+*   **25 a 50:** Difícil (textos acadêmicos ou técnicos).
+*   **0 a 25:** Muito Difícil (textos científicos, jurídicos ou de alta complexidade).
+
+No português, usamos a fórmula adaptada por **França Martins**:
+
+$$\text{Flesch} = 248.83 - (1.015 \times \text{Media de Palavras por Sentença}) - (84.6 \times \text{Media de Sílabas por Palavra})$$
+
+---
+
+## 💻 Implementação Prática em Python
+
+Para manter sua plataforma leve e rápida, criamos uma função em Python puro que estima o número de sílabas e calcula o índice de Flesch.
+
+Crie um arquivo chamado `medir_legibilidade.py`:
+
+```python
+import re
+
+def contar_silabas_estimado(palavra):
+    """
+    Uma heurística simples para contar sílabas em português baseada em grupos vocálicos.
+    Ideal para execuções rápidas e sem bibliotecas pesadas.
+    """
+    palavra = palavra.lower().strip()
+    if not palavra:
+        return 0
+    
+    # Remove pontuações comuns anexadas à palavra
+    palavra = re.sub(r'[^\w\s]', '', palavra)
+    
+    # Define grupos de vogais e ditongos como uma única sílaba teórica
+    # Esta aproximação funciona para cerca de 85-90% das palavras em PT-BR
+    padrao_vogais = r'[aeiouáéíóúâêôãõüéíóúá]+'
+    grupos_vogais = re.findall(padrao_vogais, palavra)
+    
+    # Heurística para ajustar ditongos/hiatos simples
+    total_silabas = len(grupos_vogais)
+    
+    # Palavras muito curtas têm pelo menos 1 sílaba
+    if total_silabas == 0:
+        return 1
+        
+    return total_silabas
+
+def calcular_flesch_portugues(texto):
+    # 1. Separar sentenças usando pontuação (. ! ?)
+    sentencas = [s.strip() for s in re.split(r'[.!?]+', texto) if s.strip()]
+    num_sentencas = len(sentencas)
+    
+    if num_sentencas == 0:
+        return 0.0, "Texto vazio ou inválido"
+    
+    # 2. Separar e limpar palavras
+    palavras = [p for p in texto.split() if p.strip()]
+    num_palavras = len(palavras)
+    
+    if num_palavras == 0:
+        return 0.0, "Texto sem palavras válidas"
+        
+    # 3. Contar sílabas de cada palavra
+    total_silabas = sum(contar_silabas_estimado(p) for p in palavras)
+    
+    # 4. Médias para a fórmula
+    palavras_por_sentenca = num_palavras / num_sentencas
+    silabas_por_palavra = total_silabas / num_palavras
+    
+    # 5. Aplicação da fórmula de França Martins
+    score = 248.83 - (1.015 * palavras_por_sentenca) - (84.6 * silabas_por_palavra)
+    
+    # Limitar o score entre 0 e 100 para consistência visual
+    score = max(0.0, min(100.0, score))
+    
+    # Classificação do resultado
+    if score >= 75:
+        classificacao = "Muito Fácil (Leitura fluida para qualquer público)"
+    elif score >= 50:
+        classificacao = "Fácil a Médio (Linguagem acessível e cotidiana)"
+    elif score >= 25:
+        classificacao = "Difícil (Exige atenção e vocabulário técnico)"
+    else:
+        classificacao = "Muito Difícil (Texto acadêmico ou científico denso)"
+        
+    return score, classificacao
+
+# --- TESTE PRÁTICO ---
+if __name__ == "__main__":
+    texto_complexo = (
+        "A inteligência artificial generativa denota avanços ímpares na cognição computacional, "
+        "propiciando a emulação de raciocínio lógico-formal através de redes neurais profundas."
+    )
+    
+    texto_simplificado = (
+        "A inteligência artificial avançou muito. "
+        "Agora, os computadores conseguem imitar o pensamento humano usando programas modernos."
+    )
+    
+    print("--- TEXTO COMPLEXO ---")
+    score_comp, class_comp = calcular_flesch_portugues(texto_complexo)
+    print(f"Pontuação Flesch: {score_comp:.2f}")
+    print(f"Classificação: {class_comp}\n")
+    
+    print("--- TEXTO SIMPLIFICADO ---")
+    score_simp, class_simp = calcular_flesch_portugues(texto_simplificado)
+    print(f"Pontuação Flesch: {score_simp:.2f}")
+    print(f"Classificação: {class_simp}")
+```
+
+---
+
+## 📈 Conexão com o NILC-Metrix
+
+No ambiente acadêmico brasileiro, o **NILC-Metrix** é o pacote de referência para análises linguísticas profundas. Ele avalia mais de 200 dimensões, incluindo a *Distância na Árvore de Dependências* e fórmulas sintáticas complexas (como Frazier e Yngve).
+
+O script acima funciona como o seu **"sensor de legibilidade rápido"**, ideal para dar feedback imediato ao seu agente ou plataforma. Para auditorias finais de pesquisa, o protocolo experimental do projeto prevê o envio do texto para a API do NILC-Metrix para validação das estruturas gramaticais completas.
