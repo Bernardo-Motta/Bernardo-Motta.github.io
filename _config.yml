@@ -1,1 +1,4 @@
-
+theme: jekyll-theme-minimal
+title: "Avaliação de GenAI em Português"
+description: "Sistematização prática de modelos, arquiteturas de agentes e códigos para testes locais."
+show_downloads: false
