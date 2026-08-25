@@ -48,4 +48,8 @@ Nossas avaliações são baseadas em padrões rigorosos de qualidade:
 
 Acesse nossa pasta de [códigos e testes](./codes) para encontrar scripts prontos para rodar modelos locais quantizados utilizando frameworks como **Ollama** e **Python**.
 
+*   [🤖 Como rodar o Qwen localmente](artigos/guia-qwen-local.md)
+*   [🧩 Arquiteturas Multiagentes](artigos/arquiteturas-multiagentes.md)
+*   [📊 Métricas de Legibilidade](artigos/metricas-legibilidade.md)
+
 > 💡 **Quer contribuir?** Sinta-se à vontade para enviar um Pull Request com novos modelos ou scripts de teste!
