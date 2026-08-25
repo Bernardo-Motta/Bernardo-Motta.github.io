@@ -10,7 +10,6 @@ Este primeiro script em Python faz uma chamada local para o modelo **Qwen 2.5 (7
 
 ### Código-Fonte (`teste_ollama.py`):
 
-```python
 import requests
 
 def testar_modelo_local(prompt):
@@ -30,14 +29,18 @@ def testar_modelo_local(prompt):
 if __name__ == "__main__":
     testar_modelo_local("Simplifique: 'A inteligência artificial generativa denota avanços ímpares.'")
 Como Executar:
-Certifique-se de ter o Ollama instalado e rodando no seu computador.
-Baixe o modelo executando no seu terminal: ollama run qwen2.5:7b.
-Instale a biblioteca de requisições: pip install requests.
-Baixe o script teste_ollama.py ou salve o código acima com esse nome.
-Execute com o comando: python teste_ollama.py.
-📊 2. Cálculo do Índice de Legibilidade de Flesch (PT-BR)
+1 - Certifique-se de ter o Ollama instalado e rodando no seu computador.
+2 - Baixe o modelo executando no seu terminal: ollama run qwen2.5:7b.
+3 - Instale a biblioteca de requisições: pip install requests.
+4 - Baixe o script teste_ollama.py ou salve o código acima com esse nome.
+5 - Execute com o comando: python teste_ollama.py.
+
+## 📊 2. Cálculo do Índice de Legibilidade de Flesch (PT-BR)
+
 Este segundo script foi desenvolvido para medir a complexidade de qualquer texto em português. Ele analisa a quantidade de palavras por sentença e estima as sílabas das palavras para calcular o Score de Flesch, classificando o texto de "Muito Fácil" a "Muito Difícil".
-Código-Fonte (calculo_legibilidade.py):
+
+### Código-Fonte (calculo_legibilidade.py):
+
 import re
 
 def contar_silabas_palavra(palavra):
@@ -103,7 +106,7 @@ if __name__ == "__main__":
     print(f"Score Flesch-Sabor (PT-BR): {score:.2f}")
     print(f"Classificação: {nivel}")
 Como Executar:
-Você não precisa instalar nenhuma biblioteca externa, pois este script usa apenas recursos nativos do Python!
-Salve o código acima em um arquivo chamado calculo_legibilidade.py.
-Abra o terminal na pasta do arquivo e digite: python calculo_legibilidade.py.
-Para testar outros textos, basta editar a variável texto_teste diretamente no arquivo.
+1 - Você não precisa instalar nenhuma biblioteca externa, pois este script usa apenas recursos nativos do Python!
+2 - Salve o código acima em um arquivo chamado calculo_legibilidade.py.
+3 - Abra o terminal na pasta do arquivo e digite: python calculo_legibilidade.py.
+4 - Para testar outros textos, basta editar a variável texto_teste diretamente no arquivo.
