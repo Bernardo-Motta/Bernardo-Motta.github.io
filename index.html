@@ -33,6 +33,7 @@
 <style>
   html { scroll-behavior: smooth; }
   body { background-color: #0F1220; }
+  section[id] { scroll-margin-top: 4.5rem; }
   .tag-tarefa { background:#1E2A44; color:#AFC4F2; }
   .tag-modelo { background:#20263A; color:#D8A73D; }
   .tag-custo  { background:#2A2113; color:#D8A73D; }
@@ -55,7 +56,20 @@
       <a href="#casos" class="hover:text-paper transition-colors">Casos de uso</a>
       <a href="#sobre" class="hover:text-paper transition-colors">Sobre o projeto</a>
     </nav>
+    <button id="btn-menu-mobile" class="md:hidden text-paper p-2 -mr-2" aria-label="Abrir menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
+  <nav id="menu-mobile" class="hidden md:hidden flex-col gap-1 px-6 pb-4 text-sm text-muted">
+    <a href="#metodologia" class="block py-2 hover:text-paper transition-colors">Metodologia</a>
+    <a href="#arquiteturas" class="block py-2 hover:text-paper transition-colors">Arquiteturas</a>
+    <a href="#explorador" class="block py-2 hover:text-paper transition-colors">Explorador</a>
+    <a href="#rodar" class="block py-2 hover:text-paper transition-colors">Rodar localmente</a>
+    <a href="#referencias" class="block py-2 hover:text-paper transition-colors">Referências</a>
+    <a href="#novidades" class="block py-2 hover:text-paper transition-colors">Novidades</a>
+    <a href="#casos" class="block py-2 hover:text-paper transition-colors">Casos de uso</a>
+    <a href="#sobre" class="block py-2 hover:text-paper transition-colors">Sobre o projeto</a>
+  </nav>
 </header>
 
 <!-- HERO -->
@@ -215,10 +229,26 @@
 </section>
 
 <footer class="border-t border-line py-8">
-  <div class="max-w-6xl mx-auto px-6 text-xs text-muted font-mono">Repositório aberto no GitHub — contribuições via Pull Request.</div>
+  <div class="max-w-6xl mx-auto px-6 text-xs text-muted font-mono">
+    <a href="https://github.com/Bernardo-Motta/bernardo-motta.github.io" target="_blank" rel="noopener" class="hover:text-paper transition-colors">Repositório aberto no GitHub ↗</a> — contribuições via Pull Request.
+  </div>
 </footer>
 
 <script>
+  // Menu mobile
+  const btnMenu = document.getElementById('btn-menu-mobile');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    menuMobile.classList.toggle('hidden');
+    menuMobile.classList.toggle('flex');
+  });
+  menuMobile.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menuMobile.classList.add('hidden');
+      menuMobile.classList.remove('flex');
+    });
+  });
+
   // Dados de exemplo — troque/expanda livremente sem mexer no layout
   const dados = [
     {tarefa: "Simplificação", modelo: "Llama 3 (8B)", custo: "Local / quantizado", metrica: "SARI + NILC-Metrix"},
