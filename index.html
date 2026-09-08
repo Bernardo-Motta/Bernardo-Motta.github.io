@@ -47,7 +47,11 @@
     <a href="#topo" class="font-serif text-lg tracking-tight">Avaliação de GenAI <span class="text-amber">/</span> PT-BR</a>
     <nav class="hidden md:flex gap-7 text-sm text-muted">
       <a href="#metodologia" class="hover:text-paper transition-colors">Metodologia</a>
+      <a href="#arquiteturas" class="hover:text-paper transition-colors">Arquiteturas</a>
       <a href="#explorador" class="hover:text-paper transition-colors">Explorador</a>
+      <a href="#rodar" class="hover:text-paper transition-colors">Rodar localmente</a>
+      <a href="#referencias" class="hover:text-paper transition-colors">Referências</a>
+      <a href="#novidades" class="hover:text-paper transition-colors">Novidades</a>
       <a href="#casos" class="hover:text-paper transition-colors">Casos de uso</a>
       <a href="#sobre" class="hover:text-paper transition-colors">Sobre o projeto</a>
     </nav>
@@ -99,6 +103,45 @@
   </div>
 </section>
 
+<!-- ARQUITETURAS -->
+<section id="arquiteturas" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-3">Arquiteturas: agente único e multiagentes</h2>
+  <p class="text-muted max-w-2xl mb-12 leading-relaxed">
+    Duas formas diferentes de organizar um sistema de IA generativa para resolver uma tarefa. A escolha entre elas afeta custo, complexidade e confiabilidade — por isso ela também faz parte da taxonomia do projeto.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-4 mb-10">
+    <div class="p-7 border border-line rounded-2xl bg-panel">
+      <h3 class="font-serif text-xl mb-2">Agente único</h3>
+      <p class="text-sm text-muted leading-relaxed mb-4">Um único modelo executa um ciclo de pensar → agir → observar até concluir a tarefa. Simples de implementar, depurar e rodar com poucos recursos.</p>
+      <p class="text-xs font-mono text-amber mb-2">Quando usar</p>
+      <p class="text-sm text-muted leading-relaxed mb-4">Tarefas bem definidas e de escopo fechado — simplificação de um texto, classificação, resposta a uma pergunta pontual.</p>
+      <p class="text-xs font-mono text-amber mb-2">Exemplos no projeto</p>
+      <p class="text-sm text-muted leading-relaxed">Llama 3 (8B) ou Qwen 2.5 (7B) recebendo um prompt e devolvendo a saída simplificada, sem etapas intermediárias.</p>
+    </div>
+    <div class="p-7 border border-line rounded-2xl bg-panel">
+      <h3 class="font-serif text-xl mb-2">Sistemas multiagentes</h3>
+      <p class="text-sm text-muted leading-relaxed mb-4">Vários agentes especializados cooperam, cada um responsável por uma parte do problema. Mais capaz em tarefas complexas, mas mais caro e mais difícil de avaliar.</p>
+      <p class="text-xs font-mono text-amber mb-2">Quando usar</p>
+      <p class="text-sm text-muted leading-relaxed mb-4">Tarefas que exigem múltiplas etapas distintas — por exemplo, verificar fatos, depois simplificar, depois checar preservação de sentido.</p>
+      <p class="text-xs font-mono text-amber mb-2">Exemplos no projeto</p>
+      <p class="text-sm text-muted leading-relaxed">Um agente simplifica o texto e outro verifica, de forma independente, se o sentido original foi preservado (inspirado nos critérios do ASSIN2).</p>
+    </div>
+  </div>
+
+  <h3 class="font-mono text-xs text-amber mb-4">Padrões dentro de sistemas multiagentes</h3>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="p-6 border border-line rounded-xl">
+      <h4 class="font-medium mb-2">Padrão Supervisor</h4>
+      <p class="text-sm text-muted leading-relaxed">Um agente central recebe a tarefa, delega partes dela a sub-agentes especializados e avalia/combina os resultados antes de responder.</p>
+    </div>
+    <div class="p-6 border border-line rounded-xl">
+      <h4 class="font-medium mb-2">Padrão Swarm (enxame)</h4>
+      <p class="text-sm text-muted leading-relaxed">Colaboração descentralizada: os agentes trocam informações entre si e decidem juntos os próximos passos, sem um coordenador fixo.</p>
+    </div>
+  </div>
+</section>
+
 <!-- EXPLORADOR DINÂMICO -->
 <section id="explorador" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
   <h2 class="font-serif text-3xl mb-3">Explorador da taxonomia</h2>
@@ -109,6 +152,35 @@
 
   <!-- resultados -->
   <div id="resultados" class="grid md:grid-cols-2 gap-4"></div>
+</section>
+
+<!-- RODAR LOCALMENTE -->
+<section id="rodar" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-3">Rode os modelos você mesmo</h2>
+  <p class="text-muted max-w-2xl mb-8 leading-relaxed">Scripts prontos, com os mesmos prompts padronizados do protocolo experimental do projeto — baixe e rode localmente.</p>
+
+  <div class="flex flex-wrap gap-2 mb-6" id="tabs-modelos"></div>
+  <div id="conteudo-modelo" class="border border-line rounded-2xl p-6 bg-panel"></div>
+</section>
+
+<!-- REFERÊNCIAS -->
+<section id="referencias" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-3">Referências e leituras</h2>
+  <p class="text-muted max-w-2xl mb-8 leading-relaxed">Este projeto não parte do zero — ele se apoia em benchmarks, métricas e ferramentas já estabelecidos. Aqui está a curadoria do que fundamenta a metodologia, com link direto para a fonte original.</p>
+
+  <div class="flex flex-wrap gap-2 mb-8" id="filtros-ref"></div>
+  <div id="resultados-ref" class="grid md:grid-cols-2 gap-4"></div>
+</section>
+
+<!-- NOVIDADES / NEWSLETTER -->
+<section id="novidades" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <div class="flex items-baseline justify-between flex-wrap gap-2 mb-3">
+    <h2 class="font-serif text-3xl">Novidades</h2>
+    <span class="font-mono text-xs text-muted">Atualizado periodicamente</span>
+  </div>
+  <p class="text-muted max-w-2xl mb-10 leading-relaxed">Um acompanhamento curto do que está saindo de novo em GenAI para português — papers, modelos e ferramentas relevantes para o projeto.</p>
+
+  <div id="lista-novidades" class="space-y-5"></div>
 </section>
 
 <!-- CASOS DE USO -->
@@ -184,6 +256,125 @@
     });
   }
   render();
+
+  // --- Seção "Rode os modelos você mesmo" ---
+  const modelos = [
+    {
+      nome: "Llama 3 (8B)",
+      tipo: "Local, quantizado via Ollama",
+      passos: [
+        "Instale o Ollama: ollama.com/download",
+        "Baixe o modelo: ollama pull llama3:8b",
+        "Instale a biblioteca: pip install ollama",
+      ],
+      arquivo: "scripts/run_llama3_local.py",
+    },
+    {
+      nome: "Qwen 2.5 (7B)",
+      tipo: "Local, quantizado via Ollama",
+      passos: [
+        "Instale o Ollama: ollama.com/download",
+        "Baixe o modelo: ollama pull qwen2.5:7b",
+        "Instale a biblioteca: pip install ollama",
+      ],
+      arquivo: "scripts/run_qwen2_local.py",
+    },
+    {
+      nome: "Sabiá-3",
+      tipo: "Via API (Maritaca AI, compatível com OpenAI)",
+      passos: [
+        "Crie uma chave em plataforma.maritaca.ai",
+        "Instale a biblioteca: pip install openai",
+        "Defina a variável de ambiente MARITACA_API_KEY",
+      ],
+      arquivo: "scripts/run_sabia3_api.py",
+    },
+  ];
+
+  const tabsEl = document.getElementById('tabs-modelos');
+  const conteudoEl = document.getElementById('conteudo-modelo');
+  let modeloAtivo = modelos[0].nome;
+
+  function renderModelos() {
+    tabsEl.innerHTML = modelos.map(m => `
+      <button data-m="${m.nome}" class="px-4 py-1.5 rounded-full text-sm border transition
+        ${m.nome === modeloAtivo ? 'bg-amber text-ink border-amber' : 'border-line text-muted hover:text-paper hover:border-muted'}">
+        ${m.nome}
+      </button>`).join('');
+
+    const m = modelos.find(x => x.nome === modeloAtivo);
+    conteudoEl.innerHTML = `
+      <p class="tag-modelo inline-block text-xs px-2 py-1 rounded-full mb-4">${m.tipo}</p>
+      <ol class="text-sm text-muted space-y-2 mb-6 list-decimal list-inside">
+        ${m.passos.map(p => `<li>${p}</li>`).join('')}
+      </ol>
+      <a href="${m.arquivo}" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber text-ink font-medium rounded-full text-sm hover:brightness-110 transition">
+        Baixar script de teste (.py)
+      </a>`;
+
+    tabsEl.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => { modeloAtivo = b.dataset.m; renderModelos(); });
+    });
+  }
+  renderModelos();
+
+  // --- Seção "Referências e leituras" ---
+  const referencias = [
+    { categoria: "Benchmarks", nome: "PoETa v2", desc: "Avaliação mais abrangente de LLMs em português, 44 tarefas.", url: "https://arxiv.org/abs/2511.17808" },
+    { categoria: "Benchmarks", nome: "CAPITU", desc: "Benchmark de seguimento de instruções em português, com verificação automática.", url: "https://arxiv.org/abs/2603.22576" },
+    { categoria: "Benchmarks", nome: "Open Portuguese LLM Leaderboard", desc: "Leaderboard público comparando LLMs em português.", url: "https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard" },
+    { categoria: "Métricas", nome: "SARI (paper original)", desc: "Métrica padrão para avaliação de simplificação textual.", url: "https://aclanthology.org/Q16-1029.pdf" },
+    { categoria: "Métricas", nome: "NILC-Metrix", desc: "Conjunto de métricas de legibilidade e complexidade textual em português.", url: "https://github.com/nilc-nlp/nilcmetrix" },
+    { categoria: "Métricas", nome: "MetrixDoc", desc: "Ferramenta online de métricas de complexidade textual.", url: "http://fw.nilc.icmc.usp.br:23380/metrixdoc" },
+    { categoria: "Datasets", nome: "Corpus Carolina", desc: "Corpus de referência em português brasileiro, com tipologias diversas.", url: "https://sites.usp.br/corpuscarolina/" },
+    { categoria: "Datasets", nome: "ASSIN2", desc: "Dataset de inferência textual e similaridade semântica em português.", url: "https://sites.google.com/view/assin2/" },
+    { categoria: "Datasets", nome: "PorSimples", desc: "Projeto pioneiro de simplificação textual em português, com foco em acessibilidade.", url: "https://aclanthology.org/W10-1607.pdf" },
+    { categoria: "Ferramentas", nome: "LM Evaluation Harness", desc: "Framework de referência para estruturar pipelines de avaliação de LLMs.", url: "https://zenodo.org/records/10256836" },
+    { categoria: "Ferramentas", nome: "Ollama", desc: "Ferramenta para rodar modelos open source localmente, com poucos comandos.", url: "https://ollama.com" },
+    { categoria: "Workshops", nome: "TSAR 2022", desc: "Workshop de referência sobre simplificação lexical.", url: "https://aclanthology.org/2022.tsar-1.31/" },
+  ];
+
+  const categoriasRef = ["Todas", ...new Set(referencias.map(r => r.categoria))];
+  const filtrosRefEl = document.getElementById('filtros-ref');
+  const resultadosRefEl = document.getElementById('resultados-ref');
+  let categoriaAtiva = "Todas";
+
+  function renderReferencias() {
+    filtrosRefEl.innerHTML = categoriasRef.map(c => `
+      <button data-c="${c}" class="px-4 py-1.5 rounded-full text-sm border transition
+        ${c === categoriaAtiva ? 'bg-amber text-ink border-amber' : 'border-line text-muted hover:text-paper hover:border-muted'}">
+        ${c}
+      </button>`).join('');
+
+    const lista = categoriaAtiva === "Todas" ? referencias : referencias.filter(r => r.categoria === categoriaAtiva);
+    resultadosRefEl.innerHTML = lista.map(r => `
+      <a href="${r.url}" target="_blank" rel="noopener" class="block border border-line rounded-xl p-5 hover:border-muted transition">
+        <span class="tag-custo text-xs px-2 py-1 rounded-full">${r.categoria}</span>
+        <h3 class="font-medium mt-3 mb-1">${r.nome} ↗</h3>
+        <p class="text-sm text-muted">${r.desc}</p>
+      </a>`).join('');
+
+    filtrosRefEl.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => { categoriaAtiva = b.dataset.c; renderReferencias(); });
+    });
+  }
+  renderReferencias();
+
+  // --- Seção "Novidades" (estilo newsletter — edite/adicione entradas aqui) ---
+  const novidades = [
+    { data: "23 mar 2026", titulo: "CAPITU: novo benchmark de instrução em português", resumo: "Benchmark verificável automaticamente, contextualizado em obras da literatura brasileira.", url: "https://arxiv.org/abs/2603.22576" },
+    { data: "21 nov 2025", titulo: "PoETa v2 lançado", resumo: "Avaliação mais ampla já feita de LLMs em português, com 44 tarefas e mais de 20 modelos.", url: "https://arxiv.org/abs/2511.17808" },
+    { data: "jul 2024", titulo: "API da Maritaca (Sabiá) fica compatível com OpenAI", resumo: "Passa a ser possível usar o Sabiá-3 com as mesmas bibliotecas usadas para modelos da OpenAI.", url: "https://docs.maritaca.ai" },
+  ];
+
+  document.getElementById('lista-novidades').innerHTML = novidades.map(n => `
+    <a href="${n.url}" target="_blank" rel="noopener" class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6 border-b border-line pb-5 hover:opacity-80 transition">
+      <span class="font-mono text-xs text-amber shrink-0 md:w-24">${n.data}</span>
+      <div>
+        <h3 class="font-medium">${n.titulo} ↗</h3>
+        <p class="text-sm text-muted mt-1">${n.resumo}</p>
+      </div>
+    </a>`).join('');
 </script>
 
 </body>
