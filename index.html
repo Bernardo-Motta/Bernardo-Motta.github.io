@@ -50,22 +50,6 @@
     opacity: 0.12;
   }
 
-  /* Faixa deslizante (marquee) */
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    animation: marquee-scroll 28s linear infinite;
-  }
-  .marquee-track:hover { animation-play-state: paused; }
-  @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-</style>
-</head>
-<body class="bg-ink text-paper font-sans antialiased">
-<div class="bg-dots"></div>
-
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-40 border-b border-line/60 bg-ink/85 backdrop-blur">
   <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
