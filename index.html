@@ -38,9 +38,33 @@
   .tag-modelo { background:#20263A; color:#D8A73D; }
   .tag-custo  { background:#2A2113; color:#D8A73D; }
   ::selection { background:#D8A73D; color:#0B1220; }
+
+  /* Pontilhado de fundo, fixo atrás de todo o conteúdo */
+  .bg-dots {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    pointer-events: none;
+    background-image: radial-gradient(#D8A73D 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.12;
+  }
+
+  /* Faixa deslizante (marquee) */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 28s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 </style>
 </head>
 <body class="bg-ink text-paper font-sans antialiased">
+<div class="bg-dots"></div>
 
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-40 border-b border-line/60 bg-ink/85 backdrop-blur">
@@ -86,6 +110,14 @@
     <a href="#metodologia" class="px-5 py-2.5 border border-line rounded-full text-sm text-paper hover:border-muted transition">Ver a metodologia</a>
   </div>
 </section>
+
+<!-- FAIXA DESLIZANTE -->
+<div class="relative overflow-hidden border-y border-line bg-panel py-3 -rotate-1 -mx-4 my-2">
+  <div class="marquee-track">
+    <div id="marquee-content-a" class="flex items-center"></div>
+    <div id="marquee-content-b" class="flex items-center" aria-hidden="true"></div>
+  </div>
+</div>
 
 <!-- METODOLOGIA -->
 <section id="metodologia" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
