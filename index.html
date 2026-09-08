@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metodologia de Avaliação de GenAI em Português — Deep Navy & Mustard</title>
+<meta name="description" content="Uma metodologia reprodutível para sistematizar e avaliar tecnologias de IA generativa em português.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0B1220',
+          panel: '#10192C',
+          surface: '#16213A',
+          line: '#24304A',
+          muted: '#93A0BF',
+          paper: '#ECEFF7',
+          amber: '#D8A73D',
+        },
+        fontFamily: {
+          serif: ['Newsreader', 'serif'],
+          sans: ['IBM Plex Sans', 'sans-serif'],
+          mono: ['IBM Plex Mono', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #0F1220; }
+  .tag-tarefa { background:#1E2A44; color:#AFC4F2; }
+  .tag-modelo { background:#20263A; color:#D8A73D; }
+  .tag-custo  { background:#2A2113; color:#D8A73D; }
+  ::selection { background:#D8A73D; color:#0B1220; }
+</style>
+</head>
+<body class="bg-ink text-paper font-sans antialiased">
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-40 border-b border-line/60 bg-ink/85 backdrop-blur">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="#topo" class="font-serif text-lg tracking-tight">Avaliação de GenAI <span class="text-amber">/</span> PT-BR</a>
+    <nav class="hidden md:flex gap-7 text-sm text-muted">
+      <a href="#metodologia" class="hover:text-paper transition-colors">Metodologia</a>
+      <a href="#explorador" class="hover:text-paper transition-colors">Explorador</a>
+      <a href="#casos" class="hover:text-paper transition-colors">Casos de uso</a>
+      <a href="#sobre" class="hover:text-paper transition-colors">Sobre o projeto</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="topo" class="max-w-6xl mx-auto px-6 pt-36 pb-20">
+  <p class="font-mono text-xs text-amber mb-4">Iniciação Científica — UFSJ</p>
+  <h1 class="font-serif text-4xl md:text-6xl leading-[1.08] max-w-3xl">
+    Uma forma de comparar qualquer tecnologia de IA generativa em português — não só uma.
+  </h1>
+  <p class="text-muted text-lg max-w-2xl mt-6 leading-relaxed">
+    Este site organiza uma metodologia única para classificar, testar e comparar modelos de linguagem em tarefas de simplificação, sumarização, classificação e explicação de textos — priorizando modelos leves, gratuitos e rodáveis localmente.
+  </p>
+  <div class="flex flex-wrap gap-3 mt-8">
+    <a href="#explorador" class="px-5 py-2.5 bg-amber text-ink font-medium rounded-full text-sm hover:brightness-110 transition">Explorar a taxonomia</a>
+    <a href="#metodologia" class="px-5 py-2.5 border border-line rounded-full text-sm text-paper hover:border-muted transition">Ver a metodologia</a>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section id="metodologia" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-3">Uma metodologia, muitas tarefas</h2>
+  <p class="text-muted max-w-2xl mb-12 leading-relaxed">
+    Simplificação textual é o primeiro caso aplicado — não o objetivo. A mesma estrutura de quatro etapas se repete para qualquer tarefa de GenAI.
+  </p>
+  <div class="grid md:grid-cols-4 gap-px bg-line rounded-2xl overflow-hidden">
+    <div class="bg-panel p-6">
+      <p class="font-mono text-xs text-amber mb-3">Etapa 1</p>
+      <h3 class="font-medium mb-2">Mapeamento</h3>
+      <p class="text-sm text-muted leading-relaxed">Levantar o problema, as soluções existentes e as métricas já usadas na literatura.</p>
+    </div>
+    <div class="bg-panel p-6">
+      <p class="font-mono text-xs text-amber mb-3">Etapa 2</p>
+      <h3 class="font-medium mb-2">Taxonomia</h3>
+      <p class="text-sm text-muted leading-relaxed">Classificar soluções por tarefa, tipo de modelo, abordagem, custo e forma de avaliação.</p>
+    </div>
+    <div class="bg-panel p-6">
+      <p class="font-mono text-xs text-amber mb-3">Etapa 3</p>
+      <h3 class="font-medium mb-2">Protocolo</h3>
+      <p class="text-sm text-muted leading-relaxed">Definir corpus, prompts e critérios de comparação — reprodutíveis para qualquer tarefa.</p>
+    </div>
+    <div class="bg-panel p-6">
+      <p class="font-mono text-xs text-amber mb-3">Etapa 4</p>
+      <h3 class="font-medium mb-2">Avaliação</h3>
+      <p class="text-sm text-muted leading-relaxed">Executar, medir e comparar qualidade, fidelidade e custo computacional entre modelos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLORADOR DINÂMICO -->
+<section id="explorador" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-3">Explorador da taxonomia</h2>
+  <p class="text-muted max-w-2xl mb-8 leading-relaxed">Filtre por tarefa para ver quais modelos, métricas e restrições de custo se aplicam — tudo nesta mesma página.</p>
+
+  <!-- filtros -->
+  <div class="flex flex-wrap gap-2 mb-8" id="filtros"></div>
+
+  <!-- resultados -->
+  <div id="resultados" class="grid md:grid-cols-2 gap-4"></div>
+</section>
+
+<!-- CASOS DE USO -->
+<section id="casos" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-8">Casos de uso já mapeados</h2>
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="p-5 border border-line rounded-xl">
+      <span class="tag-tarefa text-xs px-2 py-1 rounded-full">Simplificação</span>
+      <p class="text-sm text-muted mt-3">Caso aplicado principal — validação completa da metodologia.</p>
+    </div>
+    <div class="p-5 border border-line rounded-xl">
+      <span class="tag-tarefa text-xs px-2 py-1 rounded-full">Sumarização</span>
+      <p class="text-sm text-muted mt-3">Mesma taxonomia, corpus e protocolo adaptados.</p>
+    </div>
+    <div class="p-5 border border-line rounded-xl">
+      <span class="tag-tarefa text-xs px-2 py-1 rounded-full">Classificação textual</span>
+      <p class="text-sm text-muted mt-3">Foco em precisão e seguimento de instruções.</p>
+    </div>
+    <div class="p-5 border border-line rounded-xl">
+      <span class="tag-tarefa text-xs px-2 py-1 rounded-full">Geração de explicações</span>
+      <p class="text-sm text-muted mt-3">Foco em clareza e fidelidade ao conteúdo original.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
+  <h2 class="font-serif text-3xl mb-4">Sobre o projeto</h2>
+  <p class="text-muted max-w-2xl leading-relaxed">
+    Projeto de Iniciação Científica da UFSJ, orientado pelo Prof. Michel Carlo Rodrigues Leles, com foco em acessibilidade e inclusão digital via IA generativa em português.
+  </p>
+</section>
+
+<footer class="border-t border-line py-8">
+  <div class="max-w-6xl mx-auto px-6 text-xs text-muted font-mono">Repositório aberto no GitHub — contribuições via Pull Request.</div>
+</footer>
+
+<script>
+  // Dados de exemplo — troque/expanda livremente sem mexer no layout
+  const dados = [
+    {tarefa: "Simplificação", modelo: "Llama 3 (8B)", custo: "Local / quantizado", metrica: "SARI + NILC-Metrix"},
+    {tarefa: "Simplificação", modelo: "Sabiá-3", custo: "Via API", metrica: "SARI + ASSIN2"},
+    {tarefa: "Sumarização", modelo: "Qwen 2.5 (7B)", custo: "Local / quantizado", metrica: "ROUGE + fidelidade"},
+    {tarefa: "Classificação textual", modelo: "Qwen 2.5 (7B)", custo: "Local / quantizado", metrica: "Acurácia + F1"},
+    {tarefa: "Geração de explicações", modelo: "Sabiá-3", custo: "Via API", metrica: "CAPITU (instruções)"},
+  ];
+
+  const tarefas = ["Todas", ...new Set(dados.map(d => d.tarefa))];
+  const filtrosEl = document.getElementById('filtros');
+  const resultadosEl = document.getElementById('resultados');
+  let ativo = "Todas";
+
+  function render() {
+    filtrosEl.innerHTML = tarefas.map(t => `
+      <button data-t="${t}" class="px-4 py-1.5 rounded-full text-sm border transition
+        ${t === ativo ? 'bg-amber text-ink border-amber' : 'border-line text-muted hover:text-paper hover:border-muted'}">
+        ${t}
+      </button>`).join('');
+
+    const lista = ativo === "Todas" ? dados : dados.filter(d => d.tarefa === ativo);
+    resultadosEl.innerHTML = lista.map(d => `
+      <div class="border border-line rounded-xl p-5">
+        <div class="flex flex-wrap gap-2 mb-3">
+          <span class="tag-tarefa text-xs px-2 py-1 rounded-full">${d.tarefa}</span>
+          <span class="tag-custo text-xs px-2 py-1 rounded-full">${d.custo}</span>
+        </div>
+        <h3 class="font-medium mb-1">${d.modelo}</h3>
+        <p class="text-sm text-muted">Métrica: ${d.metrica}</p>
+      </div>`).join('');
+
+    filtrosEl.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => { ativo = b.dataset.t; render(); });
+    });
+  }
+  render();
+</script>
+
+</body>
+</html>
