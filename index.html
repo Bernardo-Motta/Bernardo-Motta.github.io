@@ -249,13 +249,17 @@
     });
   });
 
-  // Dados de exemplo — consigo expandir livremente sem mexer no layout
+  // Dados de exemplo — troque/expanda livremente sem mexer no layout
   const dados = [
     {tarefa: "Simplificação", modelo: "Llama 3 (8B)", custo: "Local / quantizado", metrica: "SARI + NILC-Metrix"},
     {tarefa: "Simplificação", modelo: "Sabiá-3", custo: "Via API", metrica: "SARI + ASSIN2"},
+    {tarefa: "Simplificação", modelo: "TeenyTinyLlama (460M)", custo: "Local, nativo em PT-BR", metrica: "SARI + NILC-Metrix"},
     {tarefa: "Sumarização", modelo: "Qwen 2.5 (7B)", custo: "Local / quantizado", metrica: "ROUGE + fidelidade"},
+    {tarefa: "Sumarização", modelo: "Gemma 2 (9B)", custo: "Local / quantizado", metrica: "ROUGE + fidelidade"},
     {tarefa: "Classificação textual", modelo: "Qwen 2.5 (7B)", custo: "Local / quantizado", metrica: "Acurácia + F1"},
+    {tarefa: "Classificação textual", modelo: "Mistral (7B)", custo: "Local / quantizado", metrica: "Acurácia + F1"},
     {tarefa: "Geração de explicações", modelo: "Sabiá-3", custo: "Via API", metrica: "CAPITU (instruções)"},
+    {tarefa: "Geração de explicações", modelo: "Phi-3 mini (3.8B)", custo: "Local, roda até em CPU", metrica: "CAPITU (instruções)"},
   ];
 
   const tarefas = ["Todas", ...new Set(dados.map(d => d.tarefa))];
@@ -298,6 +302,8 @@
         "Instale a biblioteca: pip install ollama",
       ],
       arquivo: "scripts/run_llama3_local.py",
+      video: "https://www.youtube.com/watch?v=seO7Iwl59IQ",
+      videoLabel: "Vídeo: Tutorial de como usar o Ollama (PT-BR)",
     },
     {
       nome: "Qwen 2.5 (7B)",
@@ -308,6 +314,20 @@
         "Instale a biblioteca: pip install ollama",
       ],
       arquivo: "scripts/run_qwen2_local.py",
+      video: "https://www.youtube.com/watch?v=QOiCYhFLYMU",
+      videoLabel: "Vídeo: Instalação de modelos de IA com Ollama (PT-BR)",
+    },
+    {
+      nome: "TeenyTinyLlama (460M)",
+      tipo: "Local, modelo nativo em português (roda em CPU)",
+      passos: [
+        "Instale as bibliotecas: pip install transformers torch",
+        "O modelo é baixado automaticamente do Hugging Face na primeira execução",
+        "Não precisa de GPU nem de quantização — só 460 milhões de parâmetros",
+      ],
+      arquivo: "scripts/run_teenytinyllama_local.py",
+      video: "https://huggingface.co/nicholasKluge/TeenyTinyLlama-460m-Chat",
+      videoLabel: "Página oficial do modelo (Hugging Face) — sem vídeo curto em PT encontrado ainda",
     },
     {
       nome: "Sabiá-3",
@@ -318,6 +338,8 @@
         "Defina a variável de ambiente MARITACA_API_KEY",
       ],
       arquivo: "scripts/run_sabia3_api.py",
+      video: "https://docs.maritaca.ai/pt/api/comeco-rapido",
+      videoLabel: "Guia oficial \"Começo Rápido\" — sem vídeo curto em PT encontrado ainda",
     },
   ];
 
@@ -338,9 +360,14 @@
       <ol class="text-sm text-muted space-y-2 mb-6 list-decimal list-inside">
         ${m.passos.map(p => `<li>${p}</li>`).join('')}
       </ol>
-      <a href="${m.arquivo}" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber text-ink font-medium rounded-full text-sm hover:brightness-110 transition">
-        Baixar script de teste (.py)
-      </a>`;
+      <div class="flex flex-wrap gap-3">
+        <a href="${m.arquivo}" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber text-ink font-medium rounded-full text-sm hover:brightness-110 transition">
+          Baixar script de teste (.py)
+        </a>
+        <a href="${m.video}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 border border-line rounded-full text-sm text-paper hover:border-muted transition">
+          ${m.videoLabel} ↗
+        </a>
+      </div>`;
 
     tabsEl.querySelectorAll('button').forEach(b => {
       b.addEventListener('click', () => { modeloAtivo = b.dataset.m; renderModelos(); });
@@ -361,6 +388,9 @@
     { categoria: "Datasets", nome: "PorSimples", desc: "Projeto pioneiro de simplificação textual em português, com foco em acessibilidade.", url: "https://aclanthology.org/W10-1607.pdf" },
     { categoria: "Ferramentas", nome: "LM Evaluation Harness", desc: "Framework de referência para estruturar pipelines de avaliação de LLMs.", url: "https://zenodo.org/records/10256836" },
     { categoria: "Ferramentas", nome: "Ollama", desc: "Ferramenta para rodar modelos open source localmente, com poucos comandos.", url: "https://ollama.com" },
+    { categoria: "Modelos", nome: "TeenyTinyLlama-460m", desc: "Modelo compacto treinado do zero em português brasileiro — roda sem GPU.", url: "https://huggingface.co/nicholasKluge/TeenyTinyLlama-460m-Chat" },
+    { categoria: "Modelos", nome: "Sabiá-3 / Maritaca AI", desc: "Modelo comercial brasileiro, com API compatível com a biblioteca da OpenAI.", url: "https://docs.maritaca.ai/pt/api/comeco-rapido" },
+    { categoria: "Modelos", nome: "Biblioteca de modelos do Ollama", desc: "Catálogo de modelos open source prontos para rodar localmente (Llama 3, Qwen, Gemma, Mistral, Phi-3).", url: "https://ollama.com/library" },
     { categoria: "Workshops", nome: "TSAR 2022", desc: "Workshop de referência sobre simplificação lexical.", url: "https://aclanthology.org/2022.tsar-1.31/" },
   ];
 
@@ -390,7 +420,7 @@
   }
   renderReferencias();
 
-  // --- Seção "Novidades" (estilo newsletter — editar/adicionar entradas aqui) ---
+  // --- Seção "Novidades" (estilo newsletter — edite/adicione entradas aqui) ---
   const novidades = [
     { data: "23 mar 2026", titulo: "CAPITU: novo benchmark de instrução em português", resumo: "Benchmark verificável automaticamente, contextualizado em obras da literatura brasileira.", url: "https://arxiv.org/abs/2603.22576" },
     { data: "21 nov 2025", titulo: "PoETa v2 lançado", resumo: "Avaliação mais ampla já feita de LLMs em português, com 44 tarefas e mais de 20 modelos.", url: "https://arxiv.org/abs/2511.17808" },
