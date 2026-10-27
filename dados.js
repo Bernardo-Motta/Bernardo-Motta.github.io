@@ -156,5 +156,112 @@ window.DADOS_VAULT = {
       "url": "https://huggingface.co/TucanoBR/Tucano-1b1-Instruct",
       "status": "pendente"
     }
+  ],
+  "explorador": [
+    {
+      "tarefa": "Simplificação",
+      "modelo": "Cabrita (7B LoRA)",
+      "custo": "Local / quantizado (LoRA)",
+      "metrica": "SARI + NILC-Metrix",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Geração de explicações",
+      "modelo": "Cabrita (7B LoRA)",
+      "custo": "Local / quantizado (LoRA)",
+      "metrica": "CAPITU (instruções)",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Simplificação",
+      "modelo": "Curió (1.1B)",
+      "custo": "Local, modelo base",
+      "metrica": "SARI + NILC-Metrix",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Sumarização",
+      "modelo": "Gemma 2 (9B)",
+      "custo": "Local / quantizado",
+      "metrica": "ROUGE + fidelidade",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Sumarização",
+      "modelo": "GlórIA (1.3B)",
+      "custo": "Local, roda em CPU (PT-PT, modelo base)",
+      "metrica": "ROUGE + fidelidade",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Simplificação",
+      "modelo": "Llama 3 (8B)",
+      "custo": "Local / quantizado",
+      "metrica": "SARI + NILC-Metrix",
+      "status": "validado"
+    },
+    {
+      "tarefa": "Classificação textual",
+      "modelo": "Mistral (7B)",
+      "custo": "Local / quantizado",
+      "metrica": "Acurácia + F1",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Geração de explicações",
+      "modelo": "Phi-3 mini (3.8B)",
+      "custo": "Local, roda até em CPU",
+      "metrica": "CAPITU (instruções)",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Sumarização",
+      "modelo": "Qwen 2.5 (7B)",
+      "custo": "Local / quantizado",
+      "metrica": "ROUGE + fidelidade",
+      "status": "validado"
+    },
+    {
+      "tarefa": "Classificação textual",
+      "modelo": "Qwen 2.5 (7B)",
+      "custo": "Local / quantizado",
+      "metrica": "Acurácia + F1",
+      "status": "validado"
+    },
+    {
+      "tarefa": "Simplificação",
+      "modelo": "Sabiá-3",
+      "custo": "Via API",
+      "metrica": "SARI + ASSIN2",
+      "status": "validado"
+    },
+    {
+      "tarefa": "Geração de explicações",
+      "modelo": "Sabiá-3",
+      "custo": "Via API",
+      "metrica": "CAPITU (instruções)",
+      "status": "validado"
+    },
+    {
+      "tarefa": "Simplificação",
+      "modelo": "TeenyTinyLlama-460m",
+      "custo": "Local, nativo em PT-BR",
+      "metrica": "SARI + NILC-Metrix",
+      "status": "validado"
+    },
+    {
+      "tarefa": "Simplificação",
+      "modelo": "Tucano (família)",
+      "custo": "Local, nativo em PT-BR",
+      "metrica": "SARI + NILC-Metrix",
+      "status": "pendente"
+    },
+    {
+      "tarefa": "Sumarização",
+      "modelo": "Tucano (família)",
+      "custo": "Local, nativo em PT-BR",
+      "metrica": "ROUGE + fidelidade",
+      "status": "pendente"
+    }
   ]
 };

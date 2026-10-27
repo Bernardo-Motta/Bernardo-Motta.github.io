@@ -251,7 +251,7 @@
   });
 
   // Dados de exemplo — troque/expanda livremente sem mexer no layout
-  const dados = [
+  const dadosFixos = [
     {tarefa: "Simplificação", modelo: "Llama 3 (8B)", custo: "Local / quantizado", metrica: "SARI + NILC-Metrix"},
     {tarefa: "Simplificação", modelo: "Sabiá-3", custo: "Via API", metrica: "SARI + ASSIN2"},
     {tarefa: "Simplificação", modelo: "TeenyTinyLlama (460M)", custo: "Local, nativo em PT-BR", metrica: "SARI + NILC-Metrix"},
@@ -265,6 +265,9 @@
     {tarefa: "Geração de explicações", modelo: "Sabiá-3", custo: "Via API", metrica: "CAPITU (instruções)"},
     {tarefa: "Geração de explicações", modelo: "Phi-3 mini (3.8B)", custo: "Local, roda até em CPU", metrica: "CAPITU (instruções)"},
   ];
+  const dados = (window.DADOS_VAULT && window.DADOS_VAULT.explorador && window.DADOS_VAULT.explorador.length)
+    ? window.DADOS_VAULT.explorador
+    : dadosFixos;
 
   const tarefas = ["Todas", ...new Set(dados.map(d => d.tarefa))];
   const filtrosEl = document.getElementById('filtros');
