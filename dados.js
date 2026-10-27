@@ -12,7 +12,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Benchmarks",
       "nome": "CAPITU",
-      "desc": "Primeiro benchmark de seguimento de instruções desenhado especificamente para o português brasileiro, com 59 tipos de instrução organizados em 7 categorias…",
+      "desc": "Primeiro benchmark de seguimento de instruções criado para o português brasileiro, com 59 tipos de instrução em 7 categorias.",
       "url": "https://arxiv.org/abs/2603.22576",
       "status": "validado"
     },
@@ -33,7 +33,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Métricas",
       "nome": "MetrixDoc",
-      "desc": "Ferramenta online de métricas de complexidade textual, irmã do NILC-Metrix — mesma base de índices sintáticos, lexicais e de coesão, mas acessível diretamente…",
+      "desc": "Ferramenta online de métricas de complexidade textual, irmã do NILC-Metrix, com os mesmos índices sintáticos, lexicais e de coesão.",
       "url": "http://fw.nilc.icmc.usp.br:23380/metrixdoc",
       "status": "validado"
     },
@@ -54,7 +54,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Benchmarks",
       "nome": "PoETa v2",
-      "desc": "Avaliação mais abrangente já feita de LLMs em português, com 44 tarefas — 12 nativamente desenvolvidas em português (capturando cultura, expressões…",
+      "desc": "Avaliação abrangente de LLMs em português, com 44 tarefas (12 nativas em português e 32 adaptadas do inglês) e mais de 20 modelos.",
       "url": "https://arxiv.org/abs/2511.17808",
       "status": "validado"
     },
@@ -68,7 +68,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Métricas",
       "nome": "SARI",
-      "desc": "Métrica padrão para avaliação automática de simplificação textual, calculada como a média de três componentes n-gram: F1 de adição (Add), F1 de manutenção…",
+      "desc": "Métrica padrão para avaliar simplificação textual: média de três componentes n-gram (adição, manutenção e remoção).",
       "url": "https://aclanthology.org/Q16-1029.pdf",
       "status": "validado"
     },
@@ -89,7 +89,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Modelos",
       "nome": "Curió (1.1B)",
-      "desc": "Família de modelos com pré-treinamento continuado em português: o Curió 1.1B parte do TinyLlama (cerca de 100B tokens do corpus ClassiCC-PT) e o Curió 7B…",
+      "desc": "Modelos com pré-treinamento continuado em português: Curió 1.1B (sobre TinyLlama), Curió 7B e Curió-Edu 7B.",
       "url": "https://huggingface.co/ClassiCC-Corpus/Curio-1.1b",
       "status": "pendente"
     },
@@ -103,7 +103,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Modelos",
       "nome": "GlórIA (1.3B)",
-      "desc": "Decoder para português europeu desenvolvido pela NOVA LINCS (Portugal), com arquitetura GPT-Neo (24 camadas, dimensão oculta 2048) e corpus de cerca de 35B…",
+      "desc": "Decoder GPT-Neo de 1.3B para português europeu (PT-PT), da NOVA LINCS; modelo base, licença só para pesquisa.",
       "url": "https://huggingface.co/NOVA-vision-language/GlorIA-1.3B",
       "status": "pendente"
     },
@@ -152,7 +152,7 @@ window.DADOS_VAULT = {
     {
       "categoria": "Modelos",
       "nome": "Tucano (família)",
-      "desc": "Família de decoders treinados do zero em português, desenvolvida por Nicholas Kluge Corrêa e colaboradores (Universidade de Bonn), com o corpus GigaVerbo…",
+      "desc": "Família de decoders treinados do zero em português (160M a 2B4), de Nicholas Kluge Corrêa e colegas; Apache 2.0.",
       "url": "https://huggingface.co/TucanoBR/Tucano-1b1-Instruct",
       "status": "pendente"
     }
