@@ -234,6 +234,7 @@
   </div>
 </footer>
 
+<script src="dados.js"></script>
 <script>
   // Menu mobile
   const btnMenu = document.getElementById('btn-menu-mobile');
@@ -403,7 +404,7 @@
   renderModelos();
 
   // --- Seção "Referências e leituras" ---
-  const referencias = [
+  const referenciasFixas = [
     { categoria: "Benchmarks", nome: "PoETa v2", desc: "Avaliação mais abrangente de LLMs em português, 44 tarefas.", url: "https://arxiv.org/abs/2511.17808" },
     { categoria: "Benchmarks", nome: "CAPITU", desc: "Benchmark de seguimento de instruções em português, com verificação automática.", url: "https://arxiv.org/abs/2603.22576" },
     { categoria: "Benchmarks", nome: "Open Portuguese LLM Leaderboard", desc: "Leaderboard público comparando LLMs em português.", url: "https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard" },
@@ -416,12 +417,16 @@
     { categoria: "Ferramentas", nome: "LM Evaluation Harness", desc: "Framework de referência para estruturar pipelines de avaliação de LLMs.", url: "https://zenodo.org/records/10256836" },
     { categoria: "Ferramentas", nome: "Ollama", desc: "Ferramenta para rodar modelos open source localmente, com poucos comandos.", url: "https://ollama.com" },
     { categoria: "Modelos", nome: "TeenyTinyLlama-460m", desc: "Modelo compacto treinado do zero em português brasileiro — roda sem GPU.", url: "https://huggingface.co/nicholasKluge/TeenyTinyLlama-460m-Chat" },
-    { categoria: "Modelos", nome: "Tucano", desc: "Família de modelos treinados do zero em português brasileiro (160M a 2.4B), Apache 2.0.", url: "https://huggingface.co/TucanoBR" },
-    { categoria: "Modelos", nome: "Curió", desc: "Modelos com pré-treinamento continuado em português (1.1B e 7B), do grupo ClassiCC-PT.", url: "https://huggingface.co/ClassiCC-Corpus" },
     { categoria: "Modelos", nome: "Sabiá-3 / Maritaca AI", desc: "Modelo comercial brasileiro, com API compatível com a biblioteca da OpenAI.", url: "https://docs.maritaca.ai/pt/api/comeco-rapido" },
     { categoria: "Modelos", nome: "Biblioteca de modelos do Ollama", desc: "Catálogo de modelos open source prontos para rodar localmente (Llama 3, Qwen, Gemma, Mistral, Phi-3).", url: "https://ollama.com/library" },
     { categoria: "Workshops", nome: "TSAR 2022", desc: "Workshop de referência sobre simplificação lexical.", url: "https://aclanthology.org/2022.tsar-1.31/" },
   ];
+  const referencias = (() => {
+    const vault = (window.DADOS_VAULT && window.DADOS_VAULT.referencias) || [];
+    const norm = u => u.replace(/\/$/, '');
+    const urls = new Set(vault.map(r => norm(r.url)));
+    return [...vault, ...referenciasFixas.filter(r => !urls.has(norm(r.url)))];
+  })();
 
   const categoriasRef = ["Todas", ...new Set(referencias.map(r => r.categoria))];
   const filtrosRefEl = document.getElementById('filtros-ref');
@@ -439,6 +444,7 @@
     resultadosRefEl.innerHTML = lista.map(r => `
       <a href="${r.url}" target="_blank" rel="noopener" class="block border border-line rounded-xl p-5 hover:border-muted transition">
         <span class="tag-custo text-xs px-2 py-1 rounded-full">${r.categoria}</span>
+        ${r.status === 'pendente' ? '<span class="text-xs text-muted ml-2">em revisão</span>' : ''}
         <h3 class="font-medium mt-3 mb-1">${r.nome} ↗</h3>
         <p class="text-sm text-muted">${r.desc}</p>
       </a>`).join('');
