@@ -50,6 +50,7 @@
       <a href="#metodologia" class="hover:text-paper transition-colors">Metodologia</a>
       <a href="#arquiteturas" class="hover:text-paper transition-colors">Arquiteturas</a>
       <a href="#explorador" class="hover:text-paper transition-colors">Explorador</a>
+<a href="#cobertura" class="hover:text-paper transition-colors">Cobertura</a>
       <a href="#rodar" class="hover:text-paper transition-colors">Rodar localmente</a>
       <a href="#referencias" class="hover:text-paper transition-colors">Referências</a>
       <a href="#novidades" class="hover:text-paper transition-colors">Novidades</a>
@@ -64,6 +65,7 @@
     <a href="#metodologia" class="block py-2 hover:text-paper transition-colors">Metodologia</a>
     <a href="#arquiteturas" class="block py-2 hover:text-paper transition-colors">Arquiteturas</a>
     <a href="#explorador" class="block py-2 hover:text-paper transition-colors">Explorador</a>
+<a href="#cobertura" class="block py-2 hover:text-paper transition-colors">Cobertura</a>
     <a href="#rodar" class="block py-2 hover:text-paper transition-colors">Rodar localmente</a>
     <a href="#referencias" class="block py-2 hover:text-paper transition-colors">Referências</a>
     <a href="#novidades" class="block py-2 hover:text-paper transition-colors">Novidades</a>
@@ -169,6 +171,21 @@
 </section>
 
 <!-- RODAR LOCALMENTE -->
+<!-- COBERTURA -->
+<section id="cobertura" class="max-w-6xl mx-auto px-6 py-20 border-t border-line hidden">
+  <h2 class="font-serif text-3xl mb-3">Cobertura do catálogo</h2>
+  <p class="text-muted mb-6 max-w-3xl">Quais modelos já estão previstos ou medidos em cada tarefa. Células vazias são lacunas: combinações ainda sem evidência no projeto.</p>
+  <div class="flex flex-wrap gap-4 text-sm text-muted mb-4">
+    <span><span class="text-amber text-xl leading-none">●</span> medido (custo computacional)</span>
+    <span><span class="text-paper text-xl leading-none">○</span> previsto, ainda não medido</span>
+    <span>- lacuna</span>
+  </div>
+  <div class="overflow-x-auto border border-line rounded-2xl">
+    <table id="matriz-cobertura" class="w-full text-sm"></table>
+  </div>
+  <div id="lacunas-cobertura" class="mt-6 text-sm text-muted space-y-2"></div>
+</section>
+
 <section id="rodar" class="max-w-6xl mx-auto px-6 py-20 border-t border-line">
   <h2 class="font-serif text-3xl mb-3">Rode os modelos você mesmo</h2>
   <p class="text-muted max-w-2xl mb-8 leading-relaxed">Scripts prontos, com os mesmos prompts padronizados do protocolo experimental do projeto — baixe e rode localmente.</p>
@@ -473,6 +490,61 @@
         <p class="text-sm text-muted mt-1">${n.resumo}</p>
       </div>
     </a>`).join('');
+</script>
+
+<!-- COBERTURA -->
+<script>
+(function () {
+  var D = window.DADOS_VAULT;
+  var dados = D && D.explorador;
+  if (!dados || !dados.length) return;
+  // Modelos já medidos (início do nome, em minúsculas). Atualize ao medir novos modelos.
+  var MEDIDOS = ["teenytinyllama", "tucano", "curió"];
+  function medido(nome) { return MEDIDOS.some(function (m) { return nome.toLowerCase().indexOf(m) === 0; }); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  var tarefas = [], modelos = [];
+  dados.forEach(function (d) {
+    if (tarefas.indexOf(d.tarefa) < 0) tarefas.push(d.tarefa);
+    if (modelos.indexOf(d.modelo) < 0) modelos.push(d.modelo);
+  });
+  var cel = {};
+  dados.forEach(function (d) { cel[d.modelo + "||" + d.tarefa] = d; });
+
+  var h = '<thead><tr class="text-left text-muted"><th class="px-4 py-3 font-medium">Modelo</th>';
+  tarefas.forEach(function (t) { h += '<th class="px-3 py-3 font-medium text-center">' + esc(t) + '</th>'; });
+  h += '</tr></thead><tbody>';
+  modelos.forEach(function (m) {
+    h += '<tr class="border-t border-line"><td class="px-4 py-2.5 whitespace-nowrap">' + esc(m) + '</td>';
+    tarefas.forEach(function (t) {
+      var d = cel[m + "||" + t];
+      if (!d) { h += '<td class="px-3 py-2.5 text-center text-muted">-</td>'; return; }
+      var ok = medido(m);
+      h += '<td class="px-3 py-2.5 text-center text-xl ' + (ok ? 'text-amber' : 'text-paper') + '" title="Métrica: ' + esc(d.metrica || "") + '">' + (ok ? '●' : '○') + '</td>';
+    });
+    h += '</tr>';
+  });
+  h += '<tr class="border-t border-line text-muted"><td class="px-4 py-2.5">Modelos medidos / previstos</td>';
+  tarefas.forEach(function (t) {
+    var prev = dados.filter(function (d) { return d.tarefa === t; });
+    var med = prev.filter(function (d) { return medido(d.modelo); }).length;
+    h += '<td class="px-3 py-2.5 text-center">' + med + ' / ' + prev.length + '</td>';
+  });
+  h += '</tr></tbody>';
+  document.getElementById("matriz-cobertura").innerHTML = h;
+
+  var semMedicao = tarefas.filter(function (t) {
+    return !dados.some(function (d) { return d.tarefa === t && medido(d.modelo); });
+  });
+  var pendentes = modelos.filter(function (m) {
+    return dados.some(function (d) { return d.modelo === m && d.status && d.status !== "validado"; });
+  });
+  var l = "";
+  if (semMedicao.length) l += "<p><b class='text-paper'>Tarefas sem nenhum modelo medido:</b> " + semMedicao.map(esc).join(", ") + ".</p>";
+  if (pendentes.length) l += "<p><b class='text-paper'>Modelos ainda pendentes de validação:</b> " + pendentes.map(esc).join(", ") + ".</p>";
+  document.getElementById("lacunas-cobertura").innerHTML = l;
+  document.getElementById("cobertura").classList.remove("hidden");
+})();
 </script>
 
 </body>
