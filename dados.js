@@ -1,7 +1,126 @@
 // Gerado por exportar_site.py a partir do vault. Não edite à mão.
 window.DADOS_VAULT = {
-  "geradoEm": "2026-10-27",
+  "geradoEm": "2026-11-26",
   "referencias": [
+    {
+      "categoria": "Artigos",
+      "nome": "A Human-in/on-the-Loop Framework for Accessible Text Generation",
+      "desc": "Framework que integra supervisão humana à geração de textos acessíveis com LLMs, com checklists, regras de acionamento e indicadores de acessibilidade.",
+      "url": "https://arxiv.org/abs/2603.18879",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Datasets",
+      "nome": "A Large-Scale Dataset for Multi-Class Financial News Classification in Brazilian Portuguese",
+      "desc": "Corpus de cerca de 160 mil notícias financeiras em português brasileiro para classificação multiclasse, com linhas de base iniciais.",
+      "url": "https://arxiv.org/abs/2610.20630",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "AI for eGovernance: Leveraging Language Technologies For Digital Inclusion",
+      "desc": "Estudo de caso da plataforma eCitizen (Quênia) que usa entrevistas e diretrizes WCAG para propor o uso de GenAI na inclusão digital no governo.",
+      "url": "https://arxiv.org/abs/2611.04820",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Enhancing Accessibility of Medical Texts through Large Language Model-Driven Plain Language Adaptation",
+      "desc": "Aplica LLMs (GPT-4o-mini, Gemini 1.5 Pro, LLaMA) à adaptação de textos médicos para linguagem simples, comparando prompts, QLoRA e Mixture-of-Agents.",
+      "url": "https://arxiv.org/abs/2609.17398",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Example-Guided Prompting for Document-Level Text Simplification",
+      "desc": "Mostra que acrescentar ao prompt exemplos de simplificação recuperados de um corpus paralelo melhora a simplificação de documentos inteiros.",
+      "url": "https://arxiv.org/abs/2608.05447",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Homebrewed SLMs: Autoregressive and Masked Diffusion Language Models Built at Home for Portuguese",
+      "desc": "Tutorial e pacote em Python para treinar do zero, em uma GPU de consumo, um modelo pequeno em português e medir se ele serve a um domínio.",
+      "url": "https://arxiv.org/abs/2610.40533",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Jev-as-a-Judge for Brazilian Portuguese Information Retrieval: Relevance Assessment and Reranking",
+      "desc": "Usa o modelo Jev como juiz de relevância em quatro coleções de recuperação de informação em português e como reranker.",
+      "url": "https://arxiv.org/abs/2610.23346",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Benchmarks",
+      "nome": "MTEB-BR: A Text Embedding Benchmark for Brazilian Portuguese",
+      "desc": "Benchmark de 22 tarefas nativas em português brasileiro para embeddings de texto, com 93 modelos avaliados e leaderboard público.",
+      "url": "https://arxiv.org/abs/2607.04581",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Manacá-1B: An Open, Reproducible Brazilian-Portuguese Language Model and a Tokenizer-Aware, Paired Evaluation",
+      "desc": "Modelo aberto de 1,72B de parâmetros treinado do zero para o português brasileiro, com pipeline reprodutível e avaliação pareada contra nove linhas de base.",
+      "url": "https://arxiv.org/abs/2608.30114",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Manacá-1B-Instruct-2: Reproducible Safety Alignment for a Native Brazilian-Portuguese LLM. Negative DPO Results, a Controlled Composition Scan, and a Silent Failure Mode of the LLM Judge",
+      "desc": "Pós-treino de segurança do Manacá-1B, com SFT de 291 mil exemplos, três tentativas negativas de DPO e uma falha silenciosa do LLM-juiz.",
+      "url": "https://arxiv.org/abs/2610.20570",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Ferramentas",
+      "nome": "MuTSE: A Human-in-the-Loop Multi-use Text Simplification Evaluator",
+      "desc": "Aplicação web que compara, em matriz, simplificações geradas por várias combinações de prompt e modelo, com alinhamento visual e anotação.",
+      "url": "https://arxiv.org/abs/2604.08947",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Datasets",
+      "nome": "NormasTCU --- A Brazilian Portuguese IR Dataset and an Evaluation of LLM-as-a-Judge for Relevance Assessment",
+      "desc": "Dataset jurídico em português para recuperação de informação e avaliação de LLMs como juízes de relevância.",
+      "url": "https://arxiv.org/abs/2608.27746",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Benchmarks",
+      "nome": "P3B3: A Multi-Turn Conversational Benchmark for Measuring European and Brazilian Portuguese Variety Bias in LLMs",
+      "desc": "Benchmark curado por especialistas que mede o viés de LLMs entre português europeu e brasileiro; a maioria dos modelos tende ao PT-BR.",
+      "url": "https://arxiv.org/abs/2606.16753",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Reinforcement Learning for improving Large Language Models' Catalan text simplification capabilities",
+      "desc": "Usa aprendizado por reforço (GRPO) com recompensa baseada em SARI para melhorar a simplificação em catalão, com treino em inglês.",
+      "url": "https://arxiv.org/abs/2609.04823",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Right at My Level: A Unified Multilingual Framework for Proficiency-Aware Text Simplification",
+      "desc": "Framework de aprendizado por reforço que adapta a simplificação lexical ao nível de proficiência do leitor, em quatro idiomas.",
+      "url": "https://arxiv.org/abs/2604.05302",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "SimpCue: Cue-Based Prompting for Multilingual Text Simplification",
+      "desc": "Testa se pistas linguísticas de complexidade no prompt melhoram a simplificação Easy-to-Read em catalão, espanhol e italiano com o Qwen3-8B.",
+      "url": "https://arxiv.org/abs/2608.28042",
+      "status": "pendente"
+    },
+    {
+      "categoria": "Artigos",
+      "nome": "Simplify-This: A Comparative Analysis of Prompt-Based and Fine-Tuned LLMs",
+      "desc": "Compara prompting e ajuste fino para simplificação: o ajuste fino simplifica mais a estrutura, enquanto o prompting tende a copiar o texto de entrada.",
+      "url": "https://arxiv.org/abs/2601.05794",
+      "status": "pendente"
+    },
     {
       "categoria": "Datasets",
       "nome": "ASSIN2",
